@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fernanda te amo 💘</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      margin: 0;
+        font-family: 'Montserrat', sans-serif;
+      background-color: #4b0000;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%235d4944' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+      color: #fff;
+    }
+
+    body.no-scroll {
+      overflow: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      font-size: 4em;
+      margin: 1em 0;
+      color: #ff9999;
+    }
+
+    .cartas {
+      display: flex;
+      justify-content: center;
+      height: 53vh;
+      gap: 20px;
+      padding: 2em;
+      flex-wrap: wrap;
+    }
+
+    .carta {
+      position: relative;
+      width: 180px;
+      height: 120px;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      overflow: hidden;
+      transition:.4s;
+    }
+
+    .carta:hover {
+      transform: scale(1.05);
+      transition: .4s;
+    }
+
+    .carta::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 90px solid transparent;
+      border-right: 90px solid transparent;
+      border-top: 60px solid rgba(255,255,255,0.3);
+    }
+
+    .carta:nth-child(1) { background: #e68080; }
+    .carta:nth-child(2) { background: #e6a85c; }
+    .carta:nth-child(3) { background: #9fdc9f; }
+    .carta:nth-child(4) { background: #5fbdd4; }
+
+    .carta-abierta {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 2000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      cursor: pointer;
+      padding: 40px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      text-align: center;
+    }
+
+    .carta-abierta .contenido {
+      max-width: 700px;
+      max-height: 100%;
+      overflow-y: auto;
+      margin: auto;
+      background: transparent;
+      padding: 30px;
+      font-size: 1.2em;
+      line-height: 1.8em;
+      text-align: center;
+    }
+
+    .carta-abierta .contenido h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2em;
+      margin-bottom: 15px;
+    }
+
+    .carta-abierta .contenido p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1em;
+      margin: 0.5em 0;
+    }
+
+    .carta-abierta::before {
+      height: 100%;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.25),
+        rgba(255,255,255,0.25) 1px,
+        transparent 2px,
+        transparent 32px
+      );
+      z-index: -1;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 15px;
+      padding: 2em;
+    }
+
+    .galeria a {
+      display: block;
+      background: #ffcc70;
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .galeria a:hover {
+      transform: scale(1.05);
+      background: #ffe7a0;
+    }
+
+    .galeria img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      cursor: pointer;
+      display: block;
+    }
+
+ .spotify {
+  margin-top: 160px;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em 0;
+  }
+  .chats {
+    margin-top: 20px;
+  }
+
+  .glide {
+    width: 100%;
+    max-width: 400px; /* Ajusta el tamaño máximo del carrusel */
+  }
+
+  .glide__slide {
+    display: flex;
+    justify-content: center; /* Centra el contenido del slide */
+    align-items: center;
+  }
+
+  .glide__slide img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+.carta-final {
+  max-width: 700px;
+  margin: 4em auto;
+  padding: 2em;
+  background-color: #fff3f3;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  color: #4b0000;
+  transition: .4s;
+}
+
+.carta-final:hover {
+  transform: scale(1.05);
+  transition: .4s;
+}
+
+.carta-final h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  color: #ff9999;
+}
+
+.contenido-carta p {
+  font-size: 1.1em;
+  line-height: 1.8em;
+  margin: 1em 0;
+}
+
+.firma {
+  margin-top: 2em;
+  font-family: 'Great Vibes', cursive;
+  font-size: 20px;
+  color: #b30000;
+}
+
+.chats img:hover {
+ transform: scale(1.05);
+ transition: .4s;
+}
+
+.chats img {
+  transition: .4s;
+}
+  
+
+  [data-glide-el="controls"] {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+  }
+
+  [data-glide-el="controls"] button {
+    background-color: #fff;
+    color: #4b0000;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+  [data-glide-el="controls"] button:hover {
+    background-color: #ffdede;
+  }
+  /* --- Responsive --- */
+
+ .foto-flotante {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 15px;
+  opacity: 0;
+  pointer-events: none;
+  animation: flotar 6s ease-in-out forwards;
+  z-index: 10;
+ }
+
+ @keyframes flotar {
+  0% {opacity: 0; transform: translateY(20x) scale(0.8);}
+  15% {opacity: 1; transform: translateY(0) scale(1);}
+  85% {opacity: 1; transform: translateY(-40px) scale(1.05);}
+  100% {opacity: 0; transform: translateY(-60px) scale(0.8);}
+ }
+
+/* Pantallas pequeñas (celulares) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3em;
+    margin: 0.5em 0;
+  }
+
+  .cartas {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    gap: 15px;
+    padding: 1em;
+  }
+
+  .carta {
+    width: 90%;
+    height: auto;
+    min-height: 120px;
+  }
+
+  .carta::before {
+    border-left: 45% solid transparent;
+    border-right: 45% solid transparent;
+    border-top: 30px solid rgba(255,255,255,0.3);
+  }
+
+  .galeria {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    padding: 1em;
+  }
+
+  .spotify {
+    margin-top: 80px;
+    padding: 1em 0;
+  }
+
+  .glide {
+    max-width: 100%;
+  }
+
+  .glide__slide img {
+    max-height: 150px;
+  }
+
+  .chats img {
+    width: 90%;
+    height: auto;
+  }
+
+  .carta-final {
+    margin: 2em 1em;
+    padding: 1.5em;
+  }
+
+  .carta-final h2 {
+    font-size: 2.2em;
+  }
+
+  .contenido-carta p {
+    font-size: 1em;
+  }
+
+  [data-glide-el="controls"] {
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+
+  [data-glide-el="controls"] button {
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+  }
+}
+
+/* Pantallas muy pequeñas (celulares muy pequeños) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.2em;
+  }
+
+  .cartas {
+    padding: 0.5em;
+  }
+
+  .carta {
+    width: 95%;
+    height: auto;
+  }
+
+  .galeria {
+    gap: 10px;
+  }
+
+  .glide__slide img {
+    max-height: 120px;
+  }
+
+  .carta-final {
+    margin: 1em 0.5em;
+    padding: 1em;
+  }
+
+  .carta-final h2 {
+    font-size: 1.8em;
+  }
+
+  .contenido-carta p {
+    font-size: 0.95em;
+  }
+}
+
+  </style>
+  <!-- Required Core Stylesheet -->
+<link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
+
+</head>
+<body>
+
+<h1>Feliz Cumpleaños mi Feñi ❤️</h1>
+
+<div class="cartas">
+  <div class="carta" data-color="#e68080" data-content="
+<h2>Cómo la conocí</h2> <p> En enero de este año entramos al mismo programa, OPP, y durante los primeros meses no hubo mucha comunicación x el grupo que digamoss SDJLKDJ. Esto fue así más o menos igual hasta el PDO en junio. Para mí, todo era muy nuevo. Usted sabe que es mi primera experiencia en un programa de este tipo, y la vi ahí, llegando al Papa Johns, no podía ser más romántico SJDLKDJWK. Pero sí, la vi llegar, preciosa como siempre. Me llamó mucho la atención. La sentí tan lejana como Arica lo está de Santiago o Chillán. La vi literalmente en otra liga, demasiado hermosa como para siquiera dirigirme la palabra. </p> <p> Y usted, (en corto), se sentó al lado mío SLKDNWLKNDSND. Luego de un rato, me preguntó qué quería estudiar o dónde quería estudiar, cosa que me descolocó completamente. Me puse nervioso y le respondí sin siquiera preguntarle de vuelta JDSLKD. </p> <p> Después, en el hotel, recuerdo cuando jugamos a la mafia. Fue como mi primera interacción real con usted, verla a los ojos, usted a mí, reírnos un poco y luego tirarle hate al Yanti JSDKJ. También recuerdo cómo usted, junto al Yanti, me acompañó al terminal, y antes de subir al bus me despedí de usted con un beso en la mejilla. Un beso que parecía insignificante, pero que fue el primero de muchos. </p> <p> Después de eso comenzamos a interactuar más por el grupo. Le reaccionaba mensajes, usted a mí, y un día, recuerdo, estábamos conversando los dos y el Joan por el grupo, y le hablé por interno a usted como para hatear juntos al Joan SJKDSKJDSKD. Y ahí empezamos a hablar, y no paramos más. </p> <p> Recuerdo que tiempo después le escribí para saber sobre Arica para una disertación. 'teni q poner fotos del yanti', decía usted SDJLKDJ. Amé hablar con usted en todo momento. Siempre me pareció interesante, pero conversando me di cuenta de que usted es un amor, y disfrutaba muchísimo nuestras conversaciones por las noches, hablando de cualquier cosa. </p> <p> Después empezamos a hablar por ig, y el resto es historia 💘 </p>
+"></div>
+  <div class="carta" data-color="#e6a85c" data-content="
+<h2>Qué quiero con usted</h2>
+<p>Mi Feñi linda, de verdad la admiro tanto y la amo con toooodo mi corazón. No podría querer nada más en esta vida que no sea verla feliz mi princesa hermosa. Amo tener conversaciones profundas con usted, escucharla, entender lo que siente, conectar con su mundo interior. Usted es una mujer taaan hermosa, con un corazón gigante y una inteligencia tan, pero taaan admirable.</p>
+<p>Estoy seguro de que está hecha para cosas grandes mi amor. Así como he podido verla enfrentar el estrés académico, lidiar con situaciones difíciles o atravesar todo este proceso que la está llevando hacia esa grandeza, también quiero estar ahí cuando todo comience a florecer, cuando los frutos lleguen y se le empiecen a cumplir sus sueños. Quiero ser parte de todo ese camino de crecimiento, no sólo de sus desafíos, sino también de sus victorias. Y usted sabe q yo creo profundamente que nunca dejamos de crecer, eso significa que quiero estar con usted toda la vida, mi niña.</p>
+<p>Mi intención es hacerla feliz. Con el tiempo, ser su lugar seguro, aprender de usted, enseñarle de mí, tomarla de la mano cuando sienta miedo y estar ahí cuando necesite aliento. Quiero sentir sus besiitos y abrazos por la mañana algún día. Quiero abrirle todas las puertas que se crucen en su camino, bajarla del auto con cuidado siempre, ser el hombre ideal para usted y sólo para usted.</p>
+<p>No tengo dobles intenciones wawi. Soy lo que lee, mi niña. Y lo que quiero es estar con usted mi princesa hermosa y con todo lo que eso significa 💛.</p>
+  "></div>
+  <div class="carta" data-color="#9fdc9f" data-content="
+<h2>Qué me hace feliz de usted</h2>
+<p>Me hace feliz despertar y darle los buenos días, o encontrar muchos mensajitos suyos cuando le toca despertar antes que a mí SJDLKJD. Me hace feliz hacerla reír con mis payasadas, llenarle el corazoncitoo, hacerla feliz a usted. Cuando me habla bonito, oooo, yo me derrito. Las veces que hemos salidoo, amor me da una calma y una paz inmensa caminar por la calle tomándole la mano, que privilegio tomar la manode fernanda garrido oo iwidiwdi. Me hace feliz jugar plato con usted, mirar sus historias destacadas, ver sus publicaciones, nuestras fotos juntos. Todo lo que gira en torno a usted me llena de alegría y me trae una calma profunda.</p>
+<p>Me hace feliz conocerla, y me siento agradecido en cada momento en que usted se abre y me permite conocer partes de su vida que son sensibles. Agradezco inmensamente la confianza que deposita en mí, como pareja y como hombre, y le prometo que jamáss la defraudaré.</p>
+<p>También me hace feliz imaginar el futuro: despertar a su lado, mirar atardeceres con usted, viajar juntos, verla cumplir sus metas y cumplir las mías con usted presente en mi vida.</p>
+<p>Mi amor, hacerme feliz le sale de manera natural 💘</p>
+
+  "></div>
+  <div class="carta" data-color="#5fbdd4" data-content="
+  <h2>Feliz Cumpleaños</h2>
+<p>Hoy celebro un nuevo año en su vida miwawi, un año mas d esa luz brillante que ilumina mis días y mis noches. Usted es increíble, y a través de este pequeño sitio web quiero agradecerle por regalarme tanta alegría, paz y amorr.</p>
+<p>En este día especial, deseo que la felicidad y la prosperidad la envuelvan y que todos sus metas se hagan realidad. Deseo que usted se encuentre por completo consigo misma y se encamine a vivir una vida plena y felizz, i'd kill to be part of that life btw ❤</p>
+<p>Gracias por ser esa luz que hace que todo tenga sentido. Feliz cumpleaños, mi amor, y que este año sea tan maravilloso como usted ❤❤</p>
+
+  "></div>
+</div>
+
+<!-- Galería --> <div class="galeria" data-aos="fade-up" id="my-gallery"> <a href="img/1.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/1.jpg" alt="Foto 1"> </a> <a href="img/2.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/2.jpg" alt="Foto 1"> </a> <a href="img/4.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/4.jpg" alt="Foto 1"> </a> <a href="img/5.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/5.jpg" alt="Foto 1"> </a> <a href="img/6.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/6.jpg" alt="Foto 1"> </a> <a href="img/8.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/8.jpg" alt="Foto 1"> </a> <a href="img/9.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/9.jpg" alt="Foto 1"> </a> <a href="img/11.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/11.jpg" alt="Foto 1"> </a> <a href="img/12.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/12.jpg" alt="Foto 1"> </a> <a href="img/13.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/13.jpg" alt="Foto 1"> </a> <a href="img/14.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/14.jpg" alt="Foto 1"> </a> <a href="img/15.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/15.jpg" alt="Foto 1"> </a> <a href="img/16.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/16.jpg" alt="Foto 1"> </a> <a href="img/17.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/17.jpg" alt="Foto 1"> </a> <a href="img/20.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/20.jpg" alt="Foto 1"> </a> <a href="img/21.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/21.jpg" alt="Foto 1"> </a> <a href="img/22.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/22.jpg" alt="Foto 1"> </a> <a href="img/25.jpg" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/25.jpg" alt="Foto 1"> </a> <a href="img/28.JPG" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/28.JPG" alt="Foto 1"> </a> <a href="img/29.JPG" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/29.JPG" alt="Foto 1"> </a> <a href="img/30.JPG" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/30.JPG" alt="Foto 1"> </a> <a href="img/31.JPG" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/31.JPG" alt="Foto 1"> </a> <a href="img/32.JPG" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/32.JPG" alt="Foto 1"> </a> <a href="img/33.JPG" data-pswp-width="2320" data-pswp-height="3088"> <img src="img/33.JPG" alt="Foto 1"> </a> </div>
+<div id="cartaAbierta" class="carta-abierta">
+  <div class="contenido"></div>
+</div>
+
+<div class="spotify">
+<div class="glide">
+  <div class="glide__track" data-glide-el="track">
+    <ul class="glide__slides">
+      <li class="glide__slide"><img src="img/spoti/KHEA, Knak, Elixir - OXICODONA.png" height="200em" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/Milo j - Cuando Estas Vos.png" height="200em" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/Milo j - DESEO PERDER (INTERLUDIO).png" height="200em" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/Ramma, Tadu Vázquez - SOBRENATURAL.png" height="200em" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/Rels B - A Mí.png" height="200em" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/SAIKO - COSAS QUE NO TE DIJE.png" height="200em" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/3AM - Por Ti.png" height="200em" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/Caleb Calloway, mvrk - JETLAG.png" height="200em" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/Juli Martorell, Ramma - INCENDIO (1).png" height="200em" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/Morad, Beny Jr, Rvfv - Lo Que Tiene.png" height="200em" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/Ramma - Algo Aparte.png" height="200" alt=""></li>
+      <li class="glide__slide"><img src="img/spoti/Ritchie Valens - We Belong Together.png" height="200em" alt=""></li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<div class="chats">
+  <center>
+  <img src="img/textchats.png" height="600em" alt="">
+  </center>
+</div>
+
+
+<section class="carta-final" data-aos="fade-up">
+  <h2>Una última cosita...</h2>
+  <div class="contenido-carta">
+    <p>
+      Hola mi feñi, espero que este muy bien mi wawi linda, pucha si le gustó el regalito a esta altura debe tener los ojitos lagrimosos ya JSLJLKDJ, mi niña lindaa. Mi idea era prepararle algo especial que nadie mas pudiera hacerle amor, no porque sea el mejor programador de chile y del mundo mundial o algo asi KSNDLKWND, pero porque ningun programador, le tiene o tendrá el amor que yo le tengo. Este regalito bebe es solo una muestra de amor, y es elmismo amor que siento por usted todos los dias, todas las horas y en cada segundo, sé que muchas veces no se lo demuestro, pero creáme que amarla es como respirar para mi a esta altura. Quiero desearle un muy feliz cumpleaños, espero que, pese a que tiene clases hoy, pueda ser muuuuuuuuy regaloneada, por su familia en arica, por sus amigos y amigas, sus profes, sus cercanos, en fin mi amor, cualquier persona en este mundo que tenga la capacidad de ver la gran mujer que es, preciosa y muy fuerte. Quiero aprovechar esta cartita para darle gracias. Me siento muy agradecido con el hecho de que Dios haya puesto una mujer tan preciosa en mi vida, alguien con quien puedo reir, alguien con quien puedo llorar, alguien en quien puedo apoyarme, alguien en quien confiar, y pucha lo mas increible todo es que, pueda haber sido alguien como usted mi feñi, teniendo no solo todas esas cualidades que acabo de mencionar, sino tambien esa belleza extrema que usted posee mi amor, una belleza que solo se puede equiparar en magnificencia a su corazoncito tan puro que quiere tan lindo. Agradezco las deep talks, el desvelarnos hablando, el hablarnos bonito, el jugar plato, el conocernos, el ser pacientes con otro, el entendernos, el confiar, el pasar del tiempo amor, es precioso ver como van avanzando los dias, y como cada vez la conozco mas, no quiero parar de conocerla ni amarla mi niña. Es un hecho que el futuro es incierto, pero puedo vernos juntos mi amor, y puedo verlo muy bien. Permítame seguir conociendola, impregnandome de su ser, de sus alegrias, sus penas, sus temores. Permítame seguir amando y conociendo a mi Fernanda Ignacia Garrido Maya. La amo mucho mi princesa hermosa, mi amor por usted no tiene final, solo un hermoso principio cada día 💘💘
+    </p>
+
+
+    <p class="firma">Con todo mi amor y admiración,<br>Francisco Muñoz💘</p>
+  </div>
+</section>
+
+<!-- Scripts -->
+<script type="module">
+  import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.js';
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#my-gallery',
+    children: 'a',
+    pswpModule: () => import('https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js')
+  });
+  lightbox.init();
+
+  const cartas = document.querySelectorAll('.carta');
+  const cartaAbierta = document.getElementById('cartaAbierta');
+  const contenido = cartaAbierta.querySelector('.contenido');
+
+  cartas.forEach(carta => {
+    carta.addEventListener('click', () => {
+      const color = carta.getAttribute('data-color');
+      const texto = carta.getAttribute('data-content');
+      cartaAbierta.style.display = 'flex';
+      cartaAbierta.style.backgroundColor = color;
+      contenido.innerHTML = texto;
+      document.body.classList.add('no-scroll');
+    });
+  });
+
+  cartaAbierta.addEventListener('click', () => {
+    cartaAbierta.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+  });
+
+
+  const fotos = [
+    "img/1.JPG",
+    "img/2.JPG",
+    "img/3.JPG",
+    "img/4.JPG",
+    "img/5.JPG",
+    "img/6.JPG",
+    "img/7.JPG",
+    "img/8.JPG",
+    "img/9.JPG",
+    "img/11.JPG",
+    "img/12.JPG",
+    "img/13.JPG",
+    "img/14.JPG",
+    "img/15.JPG",
+    "img/16.JPG",
+    "img/17.JPG",
+    "img/18.JPG",
+    "img/20.JPG",
+    "img/21.JPG",
+    "img/22.JPG",
+    "img/23.JPG",
+    "img/24.JPG",
+    "img/25.JPG",
+    "img/25.JPG",
+    "img/27.JPG",
+    "img/28.JPG",
+    "img/29.JPG",
+    "img/30.JPG",
+    "img/32.JPG",
+    "img/33.JPG",
+    
+
+  ]
+function crearFotoFlotante(x = null, y = null) {
+  const container = document.body;
+
+  // Control de cantidad máxima
+  if (container.querySelectorAll('.foto-flotante').length >= 1000) return;
+
+  const img = document.createElement('img');
+  img.src = fotos[Math.floor(Math.random() * fotos.length)];
+  img.classList.add('foto-flotante');
+
+  // Posición (clic o aleatoria)
+  const posX = x !== null ? x : Math.random() * (window.innerWidth - 100);
+  const posY = y !== null ? y : window.scrollY + Math.random() * (window.innerHeight - 100);
+
+  Object.assign(img.style, {
+    position: 'absolute',
+    left: `${posX}px`,
+    top: `${posY}px`,
+    width: '100px',
+    height: '100px',
+    transition: 'opacity 0.5s ease',
+    zIndex: 9999,
+  });
+
+  container.appendChild(img);
+
+  // Eliminar después de 6s
+  setTimeout(() => {
+    img.style.opacity = '0';
+    setTimeout(() => img.remove(), 500);
+  }, 6000);
+}
+
+// Imagen cada 1 segundo
+setInterval(() => crearFotoFlotante(), 5000);
+
+// Imagen donde se hace clic (usa pageX/pageY)
+document.addEventListener('click', (e) => {
+  crearFotoFlotante(e.pageX, e.pageY);
+});
+</script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="node_modules/@glidejs/glide/dist/glide.min.js"></script>
+
+<script>
+  new Glide('.glide', {
+    type: 'carousel',
+    autoplay: 3000, // Cambia este número para ajustar la velocidad (en milisegundos)
+    hoverpause: true, // Opcional: pausa al pasar el mouse por encima
+    perView: 1,
+    animationDuration: 800
+  }).mount();
+</script>
+</body>
+</html>
